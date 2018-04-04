@@ -29,8 +29,6 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 //-------------------------------------------------------------------------
 // Data declarations
 
-_UNKNOWN unk_40B4DC; // weak
-_UNKNOWN unk_40B4E4; // weak
 char *DOUKUTSU20041206 = "DOUKUTSU20041206"; // idb
 char *oConfig_dat = "Config.dat";
 const char *oCourier_New = "Courier New";
