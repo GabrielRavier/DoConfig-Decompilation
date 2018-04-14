@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1523702564 source:c:\users\gabriel\documents\doconfig\doconfig\doconfig.cpp
+	"stdafx.h"
+	"DoConfig.h"
+
+1522769192 c:\users\gabriel\documents\doconfig\doconfig\stdafx.h
+	"targetver.h"
+	<windows.h>
+	<stdlib.h>
+	<malloc.h>
+	<memory.h>
+	<tchar.h>
+	<cstdio>
+
+1522766796 c:\users\gabriel\documents\doconfig\doconfig\targetver.h
+	<SDKDDKVer.h>
+
+1522771069 c:\users\gabriel\documents\doconfig\doconfig\doconfig.h
+	"resource.h"
+	<stddef.h>
+
+1523605231 c:\users\gabriel\documents\doconfig\doconfig\resource.h
+
+1522766796 source:c:\users\gabriel\documents\doconfig\doconfig\stdafx.cpp
+	"stdafx.h"
+
+1523648303 source:c:\users\gabriel\documents\doconfig\doconfig\doconfig.rc
+	"resource.h"
+	<windows.h>
+
+1523648303 source:c:\users\gabriel\documents\doconfig\doconfig.rc
+	"resource.h"
+	<windows.h>
+
+1523605231 c:\users\gabriel\documents\doconfig\resource.h
+
+1522766796 source:c:\users\gabriel\documents\doconfig\stdafx.cpp
+	"stdafx.h"
+
+1522769192 c:\users\gabriel\documents\doconfig\stdafx.h
+	"targetver.h"
+	<windows.h>
+	<stdlib.h>
+	<malloc.h>
+	<memory.h>
+	<tchar.h>
+	<cstdio>
+
+1522766796 c:\users\gabriel\documents\doconfig\targetver.h
+	<SDKDDKVer.h>
+
