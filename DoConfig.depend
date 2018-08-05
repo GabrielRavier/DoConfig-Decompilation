@@ -78,3 +78,24 @@
 	"resource.h"
 	<stddef.h>
 
+1533482755 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\doconfig.rc
+	"resource.h"
+	<windows.h>
+
+1533482755 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\resource.h
+
+1533482755 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\stdafx.cpp
+	"stdafx.h"
+
+1533482755 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\stdafx.h
+	"targetver.h"
+	<windows.h>
+	<stdlib.h>
+	<malloc.h>
+	<memory.h>
+	<tchar.h>
+	<cstdio>
+
+1533482755 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\targetver.h
+	<SDKDDKVer.h>
+

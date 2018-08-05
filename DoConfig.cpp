@@ -23,7 +23,7 @@ void __cdecl initDialog(HWND hDlg);
 int __stdcall fontProcedure(const LOGFONTA *, const TEXTMETRICA *, DWORD, LPARAM);
 void __cdecl makeDefaultJoystickButtons(configDataFile *Config_file);
 void __cdecl commitChanges(HWND hDlg);
-int __cdecl saveChangesToConfig(configDataFile *Config);
+bool __cdecl saveChangesToConfig(configDataFile *Config);
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
 
 //-------------------------------------------------------------------------
@@ -59,7 +59,7 @@ int __cdecl openConfig(configDataFile *Profile)
         else
         {
             memset(Profile, 0, sizeof(*Profile));
-            return true
+            return true;
         }
     }
     else
