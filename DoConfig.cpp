@@ -37,7 +37,7 @@ int x = 335; // idb
 RECT rcWindow = { 0, 0, 0, 0 }; // idb
 int dword_40CBF0[6];
 int arrowLayoutFlag = 0; // weak
-HGDIOBJ images[2] = { NULL, NULL };
+HGDIOBJ images[2] = { nullptr, nullptr };
 CHAR exePath[260] = { 0 };
 
 
@@ -157,7 +157,7 @@ int __cdecl doFontThing(HWND hDlg)
 
     GetDlgItemTextA(hDlg, 1007, String, 100);
     if ( !strcmp(String, fontName) )
-        v7 = NULL;
+        v7 = nullptr;
     else
         v7 = String;
     v1 = CreateFontA(20, 10, 0, 0, 400, 0, 0, 0, 0, 4u, 0, 0, 1u, v7);
@@ -542,7 +542,7 @@ void __cdecl initDialog(HWND hDlg)
     }
     SendDlgItemMessageA(hDlg, 1007, 0x143u, 0, (LPARAM)fontName);
     hDC = GetDC(hDlg);
-    EnumFontFamiliesA(hDC, NULL, fontProcedure, (LPARAM)hDlg);
+    EnumFontFamiliesA(hDC, nullptr, fontProcedure, (LPARAM)hDlg);
     SendDlgItemMessageA(hDlg, 1007, 0x14Eu, 0, 0);
     ReleaseDC(hDlg, hDC);
     makeButtonModes(hDlg, &Profile);
@@ -724,11 +724,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
     size_t i; // [sp+0h] [bp-4h]@1
 
-    GetModuleFileNameA(NULL, exePath, sizeof(exePath));
+    GetModuleFileNameA(nullptr, exePath, sizeof(exePath));
     for ( i = strlen(exePath); exePath[i] != '\\'; --i )
         ;
     exePath[i] = '\0';
     // Make options dialog
-    DialogBoxParamA(hInstance, "DLG_CONFIG", NULL, optionsDialogFunction, 0);
+    DialogBoxParamA(hInstance, "DLG_CONFIG", nullptr, optionsDialogFunction, 0);
     return 1;
 }
