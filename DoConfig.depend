@@ -49,3 +49,32 @@
 1522766796 c:\users\gabriel\documents\doconfig\targetver.h
 	<SDKDDKVer.h>
 
+1523648303 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\doconfig.rc
+	"resource.h"
+	<windows.h>
+
+1523605231 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\resource.h
+
+1522766796 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\stdafx.cpp
+	"stdafx.h"
+
+1522769192 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\stdafx.h
+	"targetver.h"
+	<windows.h>
+	<stdlib.h>
+	<malloc.h>
+	<memory.h>
+	<tchar.h>
+	<cstdio>
+
+1522766796 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\targetver.h
+	<SDKDDKVer.h>
+
+1533481421 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\doconfig.cpp
+	"stdafx.h"
+	"DoConfig.h"
+
+1533480364 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfigdecompilation\doconfig.h
+	"resource.h"
+	<stddef.h>
+

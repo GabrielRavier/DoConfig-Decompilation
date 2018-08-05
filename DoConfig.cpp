@@ -14,331 +14,62 @@
 //-------------------------------------------------------------------------
 // Function declarations
 
-int __cdecl Open_Profile(Config_Data_File *Profile);
-BOOL __stdcall Options_DialogFunc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
-int __cdecl Do_Font_Thing(HWND hDlg);
-void __cdecl Enable_Gamepad_Buttons(HWND hDlg);
-void __cdecl Make_Button_Modes(HWND hDlg, Config_Data_File *Config_file);
-void __cdecl Init_Dialog(HWND hDlg);
-int __stdcall Font_Procedure(const LOGFONTA *, const TEXTMETRICA *, DWORD, LPARAM);
-void __cdecl Make_Default_Joystick_Buttons(Config_Data_File *Config_file);
-void __cdecl Commit_Changes(HWND hDlg);
-int __cdecl Save_Changes_To_Config_Dat(Config_Data_File *Config);
+int __cdecl openConfig(configDataFile *config);
+BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
+int __cdecl doFontThing(HWND hDlg);
+void __cdecl enableGamepadButtons(HWND hDlg);
+void __cdecl makeButtonModes(HWND hDlg, configDataFile *Config_file);
+void __cdecl initDialog(HWND hDlg);
+int __stdcall fontProcedure(const LOGFONTA *, const TEXTMETRICA *, DWORD, LPARAM);
+void __cdecl makeDefaultJoystickButtons(configDataFile *Config_file);
+void __cdecl commitChanges(HWND hDlg);
+int __cdecl saveChangesToConfig(configDataFile *Config);
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
 
 //-------------------------------------------------------------------------
 // Data declarations
 
-const char *DOUKUTSU20041206 = "DOUKUTSU20041206"; // idb
-const char *oConfig_dat = "Config.dat";
-const char *oCourier_New = "Courier New";
+const char *configFileCheck = "DOUKUTSU20041206"; // idb
+const char *configFileName = "Config.dat";
+const char *fontName = "Courier New";
 int y = 16; // idb
 int x = 335; // idb
-RECT Rect = { 0, 0, 0, 0 }; // idb
+RECT rcWindow = { 0, 0, 0, 0 }; // idb
 int dword_40CBF0[6];
-int Arrow_Layout_Flag = 0; // weak
-HGDIOBJ Images[2] = { NULL, NULL };
-CHAR Filename[260] =
-{
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0',
-    '\0'
-};
+int arrowLayoutFlag = 0; // weak
+HGDIOBJ images[2] = { NULL, NULL };
+CHAR exePath[260] = { 0 };
 
 
 //----- (00401000) --------------------------------------------------------
-int __cdecl Open_Profile(Config_Data_File *Profile)
+int __cdecl openConfig(configDataFile *Profile)
 {
-    int result; // eax@2
     char path[272]; // [sp+0h] [bp-118h]@1
-    int Is_read_succesful; // [sp+110h] [bp-8h]@3
     FILE *file; // [sp+114h] [bp-4h]@1
 
     memset(Profile, 0, sizeof(*Profile));
-    sprintf(path, "%s\\%s", Filename, oConfig_dat);
+    sprintf(path, "%s\\%s", exePath, configFileName);
     file = fopen(path, "rb");
-    if ( file )
+    if (file)
     {
-        Is_read_succesful = fread(Profile, sizeof(*Profile), 1u, file);
+        bool isReadSuccesful = fread(Profile, sizeof(*Profile), 1u, file);
         fclose(file);
-        if ( Is_read_succesful == 1 && !strcmp(Profile->proof, DOUKUTSU20041206) )
-        {
-            result = 1;
-        }
+        if (isReadSuccesful == true && !strcmp(Profile->proof, configFileCheck))
+            return true;
         else
         {
             memset(Profile, 0, sizeof(*Profile));
-            result = 1;
+            return true
         }
     }
     else
-    {
-        result = 0;
-    }
-    return result;
+        return false;
 }
 
 //----- (004010D0) --------------------------------------------------------
-BOOL __stdcall Options_DialogFunc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
+BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
-    Config_Data_File Config_file; // [sp+8h] [bp-F0h]@21
+    configDataFile configFile; // [sp+8h] [bp-F0h]@21
     HDC v6; // [sp+A0h] [bp-58h]@6
     HDC v7; // [sp+A4h] [bp-54h]@6
     struct tagPAINTSTRUCT Paint; // [sp+A8h] [bp-50h]@6
@@ -349,7 +80,7 @@ BOOL __stdcall Options_DialogFunc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM
     {
         v6 = BeginPaint(hWnd, &Paint);
         v7 = CreateCompatibleDC(v6);
-        v9 = SelectObject(v7, Images[Arrow_Layout_Flag]);
+        v9 = SelectObject(v7, images[arrowLayoutFlag]);
         BitBlt(v6, x, y, dword_40CBF0[1], dword_40CBF0[2], v7, 0, 0, 0xCC0020u);
         SelectObject(v7, v9);
         DeleteDC(v7);
@@ -367,24 +98,24 @@ BOOL __stdcall Options_DialogFunc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM
                     {
                         if ( (unsigned __int16)wParam == Button_Arrows_Button_Layout )
                         {
-                            Arrow_Layout_Flag = 0;
-                            InvalidateRect(hWnd, &Rect, 0);
+                            arrowLayoutFlag = 0;
+                            InvalidateRect(hWnd, &rcWindow, 0);
                         }
                         else if ( (unsigned __int16)wParam == Button_Strange_Button_Layout )
                         {
-                            Arrow_Layout_Flag = 1;
-                            InvalidateRect(hWnd, &Rect, 0);
+                            arrowLayoutFlag = 1;
+                            InvalidateRect(hWnd, &rcWindow, 0);
                         }
                         return 0;
                     }
-                    Make_Default_Joystick_Buttons(&Config_file);
-                    Make_Button_Modes(hWnd, &Config_file);
+                    makeDefaultJoystickButtons(&configFile);
+                    makeButtonModes(hWnd, &configFile);
                 }
                 else if ( (unsigned __int16)wParam != Button_Use_Gamepad )
                 {
                     if ( (unsigned __int16)wParam == Button_OK )
                     {
-                        Commit_Changes(hWnd);
+                        commitChanges(hWnd);
                         EndDialog(hWnd, 1);
                     }
                     else if ( (unsigned __int16)wParam == Button_Cancel )
@@ -393,31 +124,31 @@ BOOL __stdcall Options_DialogFunc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM
                     }
                     else if ( (unsigned __int16)wParam == Button_Font_Dropdown_Box && HIWORD(wParam) == 1 )
                     {
-                        Do_Font_Thing(hWnd);
+                        doFontThing(hWnd);
                     }
                     return 0;
                 }
-                Enable_Gamepad_Buttons(hWnd);
+                enableGamepadButtons(hWnd);
             }
             return 0;
         }
-        Init_Dialog(hWnd);
+        initDialog(hWnd);
         v10 = (HINSTANCE)GetWindowLongA(hWnd, -6);
-        Images[0] = LoadImageA(v10, (LPCSTR)NORMAL_LAYOUT, 0, 328, 120, 0);
-        Images[1] = LoadImageA(v10, (LPCSTR)STRANGE_LAYOUT, 0, 328, 120, 0);
-        Arrow_Layout_Flag = IsDlgButtonChecked(hWnd, Button_Arrows_Button_Layout) == 0;
-        GetObjectA(Images[Arrow_Layout_Flag], 24, &dword_40CBF0);
-        Rect.left = x;
-        Rect.top = y;
-        Rect.right = dword_40CBF0[1] + x;
-        Rect.bottom = dword_40CBF0[2] + y;
+        images[0] = LoadImageA(v10, (LPCSTR)NORMAL_LAYOUT, 0, 328, 120, 0);
+        images[1] = LoadImageA(v10, (LPCSTR)STRANGE_LAYOUT, 0, 328, 120, 0);
+        arrowLayoutFlag = IsDlgButtonChecked(hWnd, Button_Arrows_Button_Layout) == 0;
+        GetObjectA(images[arrowLayoutFlag], 24, &dword_40CBF0);
+        rcWindow.left = x;
+        rcWindow.top = y;
+        rcWindow.right = dword_40CBF0[1] + x;
+        rcWindow.bottom = dword_40CBF0[2] + y;
     }
     return 1;
 }
 // 40CC08: using guessed type int Arrow_Layout_Flag;
 
 //----- (004013D0) --------------------------------------------------------
-int __cdecl Do_Font_Thing(HWND hDlg)
+int __cdecl doFontThing(HWND hDlg)
 {
     HFONT v1; // eax@4
     HWND v3; // eax@4
@@ -425,7 +156,7 @@ int __cdecl Do_Font_Thing(HWND hDlg)
     LPCSTR v7; // [sp+74h] [bp-4h]@2
 
     GetDlgItemTextA(hDlg, 1007, String, 100);
-    if ( !strcmp(String, oCourier_New) )
+    if ( !strcmp(String, fontName) )
         v7 = NULL;
     else
         v7 = String;
@@ -436,7 +167,7 @@ int __cdecl Do_Font_Thing(HWND hDlg)
 }
 
 //----- (00401480) --------------------------------------------------------
-void __cdecl Enable_Gamepad_Buttons(HWND hDlg)
+void __cdecl enableGamepadButtons(HWND hDlg)
 {
     BOOL Enable_Flag; // ST0C_4@1
     HWND ret_GetDlgItem; // eax@1 MAPDST
@@ -541,7 +272,7 @@ void __cdecl Enable_Gamepad_Buttons(HWND hDlg)
 }
 
 //----- (00401980) --------------------------------------------------------
-void __cdecl Make_Button_Modes(HWND hDlg, Config_Data_File *Config_file)
+void __cdecl makeButtonModes(HWND hDlg, configDataFile *Config_file)
 {
     int v3; // [sp+20h] [bp-10h]@11
     int v4; // [sp+24h] [bp-Ch]@6
@@ -583,7 +314,7 @@ void __cdecl Make_Button_Modes(HWND hDlg, Config_Data_File *Config_file)
     if ( wParam == -1 )
         wParam = 0;
     SendDlgItemMessageA(hDlg, 1007, 0x14Eu, wParam, 0);
-    Do_Font_Thing(hDlg);
+    doFontThing(hDlg);
     CheckDlgButton(hDlg, 1008, Config_file->joystick_mode != 0);
     switch ( Config_file->joystick_button[0] )
     {
@@ -769,14 +500,14 @@ void __cdecl Make_Button_Modes(HWND hDlg, Config_Data_File *Config_file)
     default:
         break;
     }
-    Enable_Gamepad_Buttons(hDlg);
+    enableGamepadButtons(hDlg);
 }
 
 //----- (00402220) --------------------------------------------------------
-void __cdecl Init_Dialog(HWND hDlg)
+void __cdecl initDialog(HWND hDlg)
 {
     HDC hDC; // ST14_4@6
-    Config_Data_File Profile; // [sp+4h] [bp-B8h]@4
+    configDataFile Profile; // [sp+4h] [bp-B8h]@4
     int i; // [sp+A4h] [bp-18h]@1
     const char *lParam[5]; // [sp+A8h] [bp-14h]@1
 
@@ -797,7 +528,7 @@ void __cdecl Init_Dialog(HWND hDlg)
     lParam[4] = "Full 32-Bit ";
     for ( i = 0; i < 5; ++i )
         SendDlgItemMessageA(hDlg, 1070, 0x143u, 0, (LPARAM)lParam[i]);
-    if ( !Open_Profile(&Profile) )
+    if ( !openConfig(&Profile) )
     {
         Profile.joystick_mode = 1;
         Profile.joystick_button[0] = 2;
@@ -809,16 +540,16 @@ void __cdecl Init_Dialog(HWND hDlg)
         Profile.joystick_button[6] = 6;
         Profile.joystick_button[7] = 3;
     }
-    SendDlgItemMessageA(hDlg, 1007, 0x143u, 0, (LPARAM)oCourier_New);
+    SendDlgItemMessageA(hDlg, 1007, 0x143u, 0, (LPARAM)fontName);
     hDC = GetDC(hDlg);
-    EnumFontFamiliesA(hDC, NULL, Font_Procedure, (LPARAM)hDlg);
+    EnumFontFamiliesA(hDC, NULL, fontProcedure, (LPARAM)hDlg);
     SendDlgItemMessageA(hDlg, 1007, 0x14Eu, 0, 0);
     ReleaseDC(hDlg, hDC);
-    Make_Button_Modes(hDlg, &Profile);
+    makeButtonModes(hDlg, &Profile);
 }
 
 //----- (00402380) --------------------------------------------------------
-int __stdcall Font_Procedure(const LOGFONTA *a1, const TEXTMETRICA *a2, DWORD a3, LPARAM hWnd)
+int __stdcall fontProcedure(const LOGFONTA *a1, const TEXTMETRICA *a2, DWORD a3, LPARAM hWnd)
 {
     signed int v5; // [sp+0h] [bp-8h]@3
     signed int i; // [sp+4h] [bp-4h]@3
@@ -839,7 +570,7 @@ int __stdcall Font_Procedure(const LOGFONTA *a1, const TEXTMETRICA *a2, DWORD a3
 }
 
 //----- (00402420) --------------------------------------------------------
-void __cdecl Make_Default_Joystick_Buttons(Config_Data_File *Config_file)
+void __cdecl makeDefaultJoystickButtons(configDataFile *Config_file)
 {
     memset(Config_file, 0, sizeof(*Config_file));
     Config_file->joystick_mode = 1;
@@ -854,9 +585,9 @@ void __cdecl Make_Default_Joystick_Buttons(Config_Data_File *Config_file)
 }
 
 //----- (004024B0) --------------------------------------------------------
-void __cdecl Commit_Changes(HWND hDlg)
+void __cdecl commitChanges(HWND hDlg)
 {
-    Config_Data_File Config; // [sp+0h] [bp-A0h]@1
+    configDataFile Config; // [sp+0h] [bp-A0h]@1
 
     memset(&Config, 0, sizeof(Config));
     if ( IsDlgButtonChecked(hDlg, Button_Use_Gamepad) )
@@ -962,32 +693,30 @@ void __cdecl Commit_Changes(HWND hDlg)
     Config.ok_button_mode = IsDlgButtonChecked(hDlg, Button_Jump_OK) == 0;
     Config.display_mode = SendDlgItemMessageA(hDlg, Button_Screen_Resolution, 0x147u, 2u, 0);
     GetDlgItemTextA(hDlg, 1007, Config.font_name, 64);
-    Save_Changes_To_Config_Dat(&Config);
+    saveChangesToConfig(&Config);
 }
 
 //----- (00402A90) --------------------------------------------------------
-int __cdecl Save_Changes_To_Config_Dat(Config_Data_File *Config)
+bool __cdecl saveChangesToConfig(configDataFile *Config)
 {
-    int result; // eax@2
     char path[272]; // [sp+0h] [bp-118h]@1
-    int Was_Write_Succesful; // [sp+110h] [bp-8h]@3
-    FILE *Config_File; // [sp+114h] [bp-4h]@1
+    bool wasWriteSuccesful; // [sp+110h] [bp-8h]@3
+    FILE *configFile; // [sp+114h] [bp-4h]@1
 
     memset(Config, 0, 0x20u);
-    strcpy(Config->proof, DOUKUTSU20041206);
-    sprintf(path, "%s\\%s", Filename, oConfig_dat);
-    Config_File = fopen(path, "wb");
-    if ( !Config_File )
+    strcpy(Config->proof, configFileCheck);
+    sprintf(path, "%s\\%s", exePath, configFileName);
+    configFile = fopen(path, "wb");
+    if ( !configFile )
     {
-        result = 0;
+        return false;
     }
     else
     {
-        Was_Write_Succesful = fwrite(Config, sizeof(*Config), 1u, Config_File);
-        fclose(Config_File);
-        result = Was_Write_Succesful == 1;
+        wasWriteSuccesful = fwrite(Config, sizeof(*Config), 1u, configFile);
+        fclose(configFile);
+        return wasWriteSuccesful == true;
     }
-    return result;
 }
 
 //----- (00402B50) --------------------------------------------------------
@@ -995,11 +724,11 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
     size_t i; // [sp+0h] [bp-4h]@1
 
-    GetModuleFileNameA(NULL, Filename, 0x104u);
-    for ( i = strlen(Filename); Filename[i] != '\\'; --i )
+    GetModuleFileNameA(NULL, exePath, sizeof(exePath));
+    for ( i = strlen(exePath); exePath[i] != '\\'; --i )
         ;
-    Filename[i] = 0;
+    exePath[i] = '\0';
     // Make options dialog
-    DialogBoxParamA(hInstance, "DLG_CONFIG", NULL, Options_DialogFunc, 0);
+    DialogBoxParamA(hInstance, "DLG_CONFIG", NULL, optionsDialogFunction, 0);
     return 1;
 }

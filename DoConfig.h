@@ -481,7 +481,7 @@ enum MACRO_USER_PROFILE
 };
 
 /* 44 */
-struct Config_Data_File
+struct configDataFile
 {
   char proof[32];
   char font_name[64];
