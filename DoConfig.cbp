@@ -55,7 +55,9 @@
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-flto" />
 					<Add option="-O3" />
-					<Add option="-Wall" />
+					<Add option="-Weffc++" />
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
 					<Add option="-m32" />
 					<Add option="-O0" />
 					<Add option="-DWIN32" />

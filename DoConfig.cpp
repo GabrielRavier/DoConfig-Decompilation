@@ -70,21 +70,17 @@ int __cdecl openConfig(configDataFile *Profile)
 BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
     configDataFile configFile; // [sp+8h] [bp-F0h]@21
-    HDC v6; // [sp+A0h] [bp-58h]@6
-    HDC v7; // [sp+A4h] [bp-54h]@6
-    struct tagPAINTSTRUCT Paint; // [sp+A8h] [bp-50h]@6
-    HGDIOBJ v9; // [sp+F0h] [bp-8h]@6
-    HINSTANCE v10; // [sp+F4h] [bp-4h]@5
+    PAINTSTRUCT paintInfo; // [sp+A8h] [bp-50h]@6
 
     if ( Message == WM_PAINT )
     {
-        v6 = BeginPaint(hWnd, &Paint);
-        v7 = CreateCompatibleDC(v6);
-        v9 = SelectObject(v7, images[arrowLayoutFlag]);
-        BitBlt(v6, x, y, dword_40CBF0[1], dword_40CBF0[2], v7, 0, 0, 0xCC0020u);
-        SelectObject(v7, v9);
-        DeleteDC(v7);
-        EndPaint(hWnd, &Paint);
+        HDC displayHandle = BeginPaint(hWnd, &paintInfo);
+        HDC DCHandle = CreateCompatibleDC(displayHandle);
+        HGDIOBJ replacedObj = SelectObject(DCHandle, images[arrowLayoutFlag]);
+        BitBlt(displayHandle, x, y, dword_40CBF0[1], dword_40CBF0[2], DCHandle, 0, 0, 0xCC0020u);
+        SelectObject(DCHandle, replacedObj);
+        DeleteDC(DCHandle);
+        EndPaint(hWnd, &paintInfo);
     }
     else
     {
@@ -133,7 +129,7 @@ BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPA
             return 0;
         }
         initDialog(hWnd);
-        v10 = (HINSTANCE)GetWindowLongA(hWnd, -6);
+        HINSTANCE v10 = (HINSTANCE)GetWindowLongA(hWnd, -6);
         images[0] = LoadImageA(v10, (LPCSTR)NORMAL_LAYOUT, 0, 328, 120, 0);
         images[1] = LoadImageA(v10, (LPCSTR)STRANGE_LAYOUT, 0, 328, 120, 0);
         arrowLayoutFlag = IsDlgButtonChecked(hWnd, Button_Arrows_Button_Layout) == 0;
@@ -519,8 +515,7 @@ void __cdecl initDialog(HWND hDlg)
         "-- If you have problems with getting two arrow keys to work at once, please use the < > ? settings.\r\n"
         "\r\n"
         "-- Please use Courier New as the font. Others cannot be guaranteed to work.\r\n"
-        "\r\n"
-        "-- Also, hi to the CSMC !!!");
+        "\r\n");
     lParam[0] = "Full Screen";
     lParam[1] = "320x240 Windowed ";
     lParam[2] = "640x480 Windowed ";
@@ -551,13 +546,11 @@ void __cdecl initDialog(HWND hDlg)
 //----- (00402380) --------------------------------------------------------
 int __stdcall fontProcedure(const LOGFONTA *a1, const TEXTMETRICA *a2, DWORD a3, LPARAM hWnd)
 {
-    signed int v5; // [sp+0h] [bp-8h]@3
-    signed int i; // [sp+4h] [bp-4h]@3
 
     if ( a3 & 4 && IsWindow((HWND)hWnd) )
     {
-        v5 = strlen(a1->lfFaceName);
-        for ( i = 0; i < v5 && a1->lfFaceName[i] != 64; ++i )
+        size_t lenFaceName = strlen(a1->lfFaceName);
+        for (size_t i = 0; i < lenFaceName && a1->lfFaceName[i] != 64; ++i )
         {
             if ( a1->lfFaceName[i] & 0x80 )
             {
@@ -700,7 +693,6 @@ void __cdecl commitChanges(HWND hDlg)
 bool __cdecl saveChangesToConfig(configDataFile *Config)
 {
     char path[272]; // [sp+0h] [bp-118h]@1
-    bool wasWriteSuccesful; // [sp+110h] [bp-8h]@3
     FILE *configFile; // [sp+114h] [bp-4h]@1
 
     memset(Config, 0, 0x20u);
@@ -713,7 +705,7 @@ bool __cdecl saveChangesToConfig(configDataFile *Config)
     }
     else
     {
-        wasWriteSuccesful = fwrite(Config, sizeof(*Config), 1u, configFile);
+        bool wasWriteSuccesful = fwrite(Config, sizeof(*Config), 1u, configFile);
         fclose(configFile);
         return wasWriteSuccesful == true;
     }

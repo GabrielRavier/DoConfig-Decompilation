@@ -99,3 +99,11 @@
 1533482755 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\targetver.h
 	<SDKDDKVer.h>
 
+1533484045 source:c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\doconfig.cpp
+	"stdafx.h"
+	"DoConfig.h"
+
+1533483070 c:\users\administrator\onedrive\documents\ecole\franc_sais\3e\chapitre_1\snes_roms\programming\projects\c++\decompilations\doconfig-decompilation\doconfig.h
+	"resource.h"
+	<stddef.h>
+
