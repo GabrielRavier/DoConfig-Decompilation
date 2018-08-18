@@ -14,7 +14,7 @@
 //-------------------------------------------------------------------------
 // Function declarations
 
-int __cdecl openConfig(configDataFile *config);
+bool __cdecl openConfig(configDataFile *config);
 BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
 int __cdecl doFontThing(HWND hDlg);
 void __cdecl enableGamepadButtons(HWND hDlg);
@@ -32,8 +32,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 const char *configFileCheck = "DOUKUTSU20041206"; // idb
 const char *configFileName = "Config.dat";
 const char *fontName = "Courier New";
-int y = 16; // idb
-int x = 335; // idb
+int yPos = 16; // idb
+int xPos = 335; // idb
 RECT rcWindow = { 0, 0, 0, 0 }; // idb
 int dword_40CBF0[6];
 int arrowLayoutFlag = 0; // weak
@@ -42,7 +42,7 @@ CHAR exePath[260] = { 0 };
 
 
 //----- (00401000) --------------------------------------------------------
-int __cdecl openConfig(configDataFile *Profile)
+bool __cdecl openConfig(configDataFile *Profile)
 {
     char path[272]; // [sp+0h] [bp-118h]@1
     FILE *file; // [sp+114h] [bp-4h]@1
@@ -77,7 +77,7 @@ BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPA
         HDC displayHandle = BeginPaint(hWnd, &paintInfo);
         HDC DCHandle = CreateCompatibleDC(displayHandle);
         HGDIOBJ replacedObj = SelectObject(DCHandle, images[arrowLayoutFlag]);
-        BitBlt(displayHandle, x, y, dword_40CBF0[1], dword_40CBF0[2], DCHandle, 0, 0, 0xCC0020u);
+        BitBlt(displayHandle, xPos, yPos, dword_40CBF0[1], dword_40CBF0[2], DCHandle, 0, 0, 0xCC0020u);
         SelectObject(DCHandle, replacedObj);
         DeleteDC(DCHandle);
         EndPaint(hWnd, &paintInfo);
@@ -134,10 +134,10 @@ BOOL __stdcall optionsDialogFunction(HWND hWnd, UINT Message, WPARAM wParam, LPA
         images[1] = LoadImageA(v10, (LPCSTR)STRANGE_LAYOUT, 0, 328, 120, 0);
         arrowLayoutFlag = IsDlgButtonChecked(hWnd, Button_Arrows_Button_Layout) == 0;
         GetObjectA(images[arrowLayoutFlag], 24, &dword_40CBF0);
-        rcWindow.left = x;
-        rcWindow.top = y;
-        rcWindow.right = dword_40CBF0[1] + x;
-        rcWindow.bottom = dword_40CBF0[2] + y;
+        rcWindow.left = xPos;
+        rcWindow.top = yPos;
+        rcWindow.right = dword_40CBF0[1] + xPos;
+        rcWindow.bottom = dword_40CBF0[2] + yPos;
     }
     return 1;
 }
